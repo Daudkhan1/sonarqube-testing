@@ -18,20 +18,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Optional: Install Node.js if your project uses it
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      # Optional: Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Optional: Run tests (important for coverage)
-      - name: Run tests
-        run: npm test
-
       # SonarCloud analysis
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
