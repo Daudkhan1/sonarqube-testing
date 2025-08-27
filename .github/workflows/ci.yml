@@ -1,29 +1,39 @@
-name: CI Pipeline with SonarCloud
+name: Build & SonarCloud Analysis
 
 on:
   push:
     branches:
       - main
   pull_request:
-    branches:
-      - main
+    types: [opened, synchronize, reopened]
 
 jobs:
-  build:
+  sonarqube:
+    name: SonarQube
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # important for sonar history
+          fetch-depth: 0
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
+      # Optional: Install Node.js if your project uses it
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          args: >
-            -Dsonar.organization=my-testing
-            -Dsonar.projectKey=my-testing_my-testing
+          node-version: '18'
+
+      # Optional: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Optional: Run tests (important for coverage)
+      - name: Run tests
+        run: npm test
+
+      # SonarCloud analysis
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: "https://sonarcloud.io"
