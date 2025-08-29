@@ -30,7 +30,8 @@ jobs:
                   --config=p/ci \
                   --config=.semgrep/custom.yml \
                   --baseline-commit ${{ github.event.pull_request.base.sha }} \
-                  --json > semgrep-results.json || true
+                  --json --json-output= semgrep-results.json \
+                  --output=semgrep-results.rdjson --error --strict --enable-metrics=off
 
           cat semgrep-results.json | reviewdog \
             -f=rdjson \
