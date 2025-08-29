@@ -26,8 +26,9 @@ jobs:
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          semgrep --config=p/ci \
-                  --baseline-commit origin/${{ github.base_ref }} \
+          semgrep --config=p/security-audit \
+                  --config=p/javascript \
+                  --baseline-commit ${{ github.event.pull_request.base.sha }} \
                   --json > semgrep-results.json || true
 
           cat semgrep-results.json | reviewdog \
