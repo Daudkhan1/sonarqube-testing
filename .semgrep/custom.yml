@@ -1,0 +1,56 @@
+rules:
+  # --- Security ---
+  - id: js-sql-injection
+    patterns:
+      - pattern: db.query($SQL + $VAR)
+    message: 🚨 SQL Injection risk - concatenated SQL query
+    languages: [javascript]
+    severity: ERROR
+
+  - id: js-dangerous-eval
+    pattern: eval($X)
+    message: 🚨 Avoid using eval(), security risk
+    languages: [javascript]
+    severity: ERROR
+
+  - id: js-child-process-exec
+    pattern: require('child_process').exec($CMD)
+    message: 🚨 Dangerous use of child_process.exec()
+    languages: [javascript]
+    severity: ERROR
+
+  - id: js-hardcoded-secret
+    pattern-regex: '(password|secret|apikey|api_key|token)\s*[:=]\s*["''][^"'']+["'']'
+    message: 🔑 Hardcoded secret detected
+    languages: [javascript]
+    severity: ERROR
+
+  # --- Bug/Quality ---
+  - id: js-double-equals
+    pattern: $X == $Y
+    message: ⚠️ Use === instead of ==
+    languages: [javascript]
+    severity: WARNING
+
+  - id: js-unused-var
+    pattern: var $X = $VAL
+    message: ⚠️ Possible unused variable
+    languages: [javascript]
+    severity: INFO
+    metadata:
+      likelihood: MEDIUM
+
+  # --- Reliability ---
+  - id: js-missing-error-handling
+    patterns:
+      - pattern: fs.readFile($F, $ENC, $CB)
+      - pattern-not: fs.readFile($F, $ENC, function(err, $RES) { ... })
+    message: ⚠️ Missing error handling in fs.readFile callback
+    languages: [javascript]
+    severity: WARNING
+
+  - id: js-console-log
+    pattern: console.log($X)
+    message: ⚠️ Debug log found - consider removing in production
+    languages: [javascript]
+    severity: INFO
