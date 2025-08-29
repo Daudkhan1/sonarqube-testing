@@ -27,7 +27,8 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           semgrep --config=p/security-audit \
-                  --config=p/javascript \
+                  --config=p/ci \
+                  --config=.semgrep/custom.yml \
                   --baseline-commit ${{ github.event.pull_request.base.sha }} \
                   --json > semgrep-results.json || true
 
