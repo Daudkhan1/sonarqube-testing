@@ -25,13 +25,14 @@ jobs:
       - name: Run Semgrep on PR changes with reviewdog
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SEMGREP_SEND_METRICS: "off"
         run: |
           semgrep --config=p/security-audit \
                   --config=p/ci \
                   --config=.semgrep/custom.yml \
                   --baseline-commit ${{ github.event.pull_request.base.sha }} \
                   --json --json-output= semgrep-results.json \
-                  --output=semgrep-results.rdjson --error --strict --enable-metrics=off
+                  --output=semgrep-results.rdjson --error --strict
 
           cat semgrep-results.json | reviewdog \
             -f=rdjson \
