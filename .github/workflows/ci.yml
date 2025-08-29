@@ -1,19 +1,35 @@
-name: Build
+name: PR Scan with Semgrep + Reviewdog
+
 on:
-  push:
-    branches:
-      - main
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches:
+      - main   # ✅ PRs into main branch
+
 jobs:
-  sonarqube:
-    name: SonarQube
+  semgrep-reviewdog:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v5
+          fetch-depth: 0   # required for diff
+
+      - name: Install dependencies
+        run: |
+          pip install semgrep
+          curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh \
+            | sh -s -- -b /usr/local/bin
+
+      - name: Run Semgrep on PR changes
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          semgrep --config=p/ci \
+                  --baseline-commit origin/${{ github.base_ref }} \
+                  --json > semgrep-results.json || true
+
+          cat semgrep-results.json | reviewdog -f=semgrep \
+            -name="Semgrep Scan" \
+            -reporter=github-pr-review \
+            -fail-on-error=true

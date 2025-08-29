@@ -14,3 +14,8 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
+// BAD: SQL injection pattern for testing
+db.query("SELECT * FROM users WHERE id=" + req.query.id);
+
