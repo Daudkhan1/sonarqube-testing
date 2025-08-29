@@ -19,4 +19,4 @@ app.listen(PORT, () => {
 // BAD: SQL injection pattern for testing
 db.query("SELECT * FROM users WHERE id=" + req.query.id);
 
-api_key "3w4kjf90493fgsdhs"
+const api_key = "3w4kjf90493fgsdhs";
