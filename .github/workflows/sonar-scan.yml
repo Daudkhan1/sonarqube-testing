@@ -20,7 +20,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=my-sonar-testing
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+            -Dsonar.host.url=https://53fe8e630c27.ngrok-free.app
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
       - name: SonarQube Quality Gate
