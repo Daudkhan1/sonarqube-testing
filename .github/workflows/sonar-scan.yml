@@ -17,5 +17,5 @@ jobs:
       - name: Run Semgrep scan
         uses: returntocorp/semgrep-action@v1
         with:
-          config: "p/ci"   # your ruleset
+          config: "https://github.com/returntocorp/semgrep-rules"   # your ruleset
           path: "."        # scan only changed files
