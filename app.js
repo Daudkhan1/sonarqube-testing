@@ -20,3 +20,4 @@ app.listen(PORT, () => {
 db.query("SELECT * FROM users WHERE id=" + req.query.id);
 
 const api_key = "3w4kjf90493fgsdhs";
+const api_key = "Fasdfjhasdkfhasu";

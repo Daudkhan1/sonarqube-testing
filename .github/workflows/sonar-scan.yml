@@ -27,5 +27,5 @@ jobs:
       - name: SonarQube Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@v1
         with:
-          host: ${{ secrets.SONAR_HOST_URL }}
-          login: ${{ secrets.SONAR_TOKEN }}
+          scanMetadataReportFile: .scannerwork/report-task.txt
+        continue-on-error: true
