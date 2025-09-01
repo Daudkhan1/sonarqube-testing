@@ -1,4 +1,4 @@
-name: PR Scan
+name: "PR CodeQL Scan"
 
 on:
   pull_request:
@@ -7,14 +7,33 @@ on:
       - staging
 
 jobs:
-  pr_scan:
+  codeql:
+    name: "CodeQL PR Analysis"
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Run Semgrep scan
-        uses: returntocorp/semgrep-action@v1
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          config: "https://semgrep.dev/p/r2c-python"
+          fetch-depth: 0   # Required for full PR context
+
+      # Step 2: Initialize CodeQL
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python, javascript   # Add all languages in your repo
+          # You can also specify queries to run. For PR scan, default is usually fine.
+          # queries: security-and-quality
+
+      # Step 3: Autobuild (if needed)
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      # Step 4: Perform the CodeQL analysis
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          # Enables PR-only scanning
+          category: "pull-request"
+
