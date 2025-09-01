@@ -17,5 +17,4 @@ jobs:
       - name: Run Semgrep scan
         uses: returntocorp/semgrep-action@v1
         with:
-          config: "https://github.com/returntocorp/semgrep-rules/tree/develop/python"   # your ruleset
-          path: "."
+          config: "https://semgrep.dev/p/r2c-python"
