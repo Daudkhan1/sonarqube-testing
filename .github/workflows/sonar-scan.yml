@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run Semgrep scan
-        uses: returntocorp/semgrep-action@v2
+        uses: returntocorp/semgrep-action@v1
         with:
           config: "p/ci"   # your ruleset
           path: "."        # scan only changed files
