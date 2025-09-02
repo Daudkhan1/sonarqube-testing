@@ -25,4 +25,8 @@ jobs:
 
       # Step 4: Run Semgrep scan
       - name: Run Semgrep SAST Scan
-        run: semgrep ci --config "p/ci" --dashboard-api-key ${{ secrets.SEMGREP_APP_TOKEN }}
+        uses: returntocorp/semgrep-action@v2
+        with:
+          config: "p/ci"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
