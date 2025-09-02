@@ -1,34 +1,29 @@
-Rule 1: Finds hardcoded secrets.
-
-    id: hardcoded-secrets-generic
+rules:
+  # Rule 1: Finds hardcoded secrets.
+  - id: hardcoded-secrets-generic
     message: "A hardcoded secret or sensitive value was found. Secrets should be stored in environment variables or a secure vault."
     pattern: |
-    "super_secret_password_123"
+      "super_secret_password_123"
     languages:
+      - python
+    severity: ERROR
 
-        python
-        severity: WARNING
-
-Rule 2: Finds a potential command injection vulnerability.
-
-    id: python-os-system
-    message: "Using os.system with untrusted input can lead to a command injection vulnerability. Consider using a safer subprocess module."
+  # Rule 2: Finds a potential command injection vulnerability.
+  - id: python-os-system
+    message: "Using `os.system` with untrusted input can lead to a command injection vulnerability. Consider using a safer subprocess module."
     pattern: os.system($X)
     languages:
+      - python
+    severity: ERROR
 
-        python
-        severity: WARNING
-
-Rule 3: Finds an inefficient nested loop.
-
-    id: inefficient-nested-loop-check
+  # Rule 3: Finds an inefficient nested loop.
+  - id: inefficient-nested-loop-check
     message: "This nested loop has a performance issue. The time complexity is O(N^2), which can be slow on large datasets. Try to refactor the algorithm."
     pattern: |
-    for $X in $L:
-    ...
-    for $Y in $L:
-    ...
+      for $X in $L:
+        ...
+        for $Y in $L:
+          ...
     languages:
-
-        python
-        severity: WARNING
+      - python
+    severity: WARNING
