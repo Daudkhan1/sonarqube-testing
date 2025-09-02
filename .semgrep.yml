@@ -5,7 +5,8 @@ rules:
       - python
     severity: WARNING
     patterns:
-      - pattern: ($X = "..." or $X = '...')
+      - pattern: $X = "..."
+      - pattern: $X = '...'
       - metavariable-regex:
           metavariable: $X
           regex: (password|passwd|pwd|secret|key|token|creds|credential|api|username|user|email)
