@@ -25,7 +25,7 @@ jobs:
 
       # Step 4: Run Semgrep scan
       - name: Run Semgrep SAST Scan
-        uses: returntocorp/semgrep-action@v2
+        uses: returntocorp/semgrep-action@v1
         with:
           config: "p/ci"
           github_token: ${{ secrets.GITHUB_TOKEN }}
