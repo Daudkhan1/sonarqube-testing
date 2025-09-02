@@ -17,7 +17,7 @@ def check_password(user_input):
     """
     # Hardcoded password
     # Semgrep should flag this.
-    if user_input == "super_secret_password_123":
+    if user_input == "super":
         return True
     return False
 
