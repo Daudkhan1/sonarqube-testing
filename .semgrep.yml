@@ -1,6 +1,5 @@
 rules:
   # Rule 1: Finds hardcoded secrets by looking for a wider range of common variable names.
-  # This rule will now catch variables named 'api', 'username', 'token', and more.
   - id: hardcoded-secrets-generic
     message: "A hardcoded secret or sensitive value was found. Secrets should be stored in environment variables or a secure vault."
     pattern: |
@@ -8,8 +7,9 @@ rules:
     languages:
       - python
       - javascript
-    metavariable-regex:
-      X: (password|passwd|pwd|secret|key|token|creds|credential|api|username|user|email)
+    metavariable-pattern:
+      metavariable: $X
+      regex: (password|passwd|pwd|secret|key|token|creds|credential|api|username|user|email)
     severity: WARNING
 
   # Rule 2: Finds a broader range of command injection vulnerabilities, including code execution.
