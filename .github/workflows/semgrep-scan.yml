@@ -25,12 +25,4 @@ jobs:
 
       # Step 4: Run Semgrep scan
       - name: Run Semgrep SAST Scan
-        run: |
-          semgrep \
-            --config "p/ci" \
-            --severity MEDIUM \
-            --json \
-            --output semgrep-results.json \
-            --dashboard-api-key ${{ secrets.SEMGREP_APP_TOKEN }} \
-            --fail-on-issues \
-            .
+        run: semgrep ci --config "p/ci" --dashboard-api-key ${{ secrets.SEMGREP_APP_TOKEN }}
