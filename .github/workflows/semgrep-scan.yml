@@ -1,0 +1,42 @@
+# This workflow runs Semgrep on every pull request.
+
+name: Semgrep Scan
+
+on:
+  pull_request:
+
+jobs:
+  semgrep:
+    name: Scan with Semgrep
+    runs-on: ubuntu-latest
+    
+    # We use the permissions field to ensure the workflow can access the repository content.
+    permissions:
+      contents: read
+      pull-requests: write # This is required to post results as comments on the pull request.
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep
+        # Use the official Semgrep GitHub Action.
+        # This action automatically handles installation and running Semgrep.
+        uses: semgrep/semgrep-action@v1
+        with:
+          # The 'config' option specifies the rule sets to use.
+          # Here, we've included three official rule sets:
+          # - p/security: Checks for common security vulnerabilities (e.g., SQL injection, XSS).
+          # - p/correctness: Finds bugs and errors (e.g., unreachable code, race conditions).
+          # - p/performance: Identifies potential performance bottlenecks in your code.
+          config: >-
+            p/security 
+            p/correctness 
+            p/performance
+            
+          # Optional: Uncomment and configure this to send results to Semgrep's dashboard for pro features.
+          # publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
+          
+          # Optional: By default, this action will fail the build if it finds any issues.
+          # You can set this to `false` if you want the build to pass but still see the findings.
+          fail-on-findings: true
