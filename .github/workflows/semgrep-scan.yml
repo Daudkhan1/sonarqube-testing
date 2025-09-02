@@ -8,25 +8,28 @@ on:
 jobs:
   semgrep:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+
     steps:
-      # Step 1: Checkout the code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up Python (Semgrep runs on Python)
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      # Step 3: Install Semgrep
       - name: Install Semgrep
         run: pip install semgrep
 
-      # Step 4: Run Semgrep scan
       - name: Run Semgrep SAST Scan
-        uses: returntocorp/semgrep-action@v1
+        id: semgrep_scan
+        run: |
+          semgrep ci --config "p/ci" --publish-token ${{ secrets.SEMGREP_APP_TOKEN }} --json --output semgrep-results.json
+
+      - name: Upload SARIF to GitHub Security Dashboard
+        uses: github/codeql-action/upload-sarif@v2
         with:
-          config: "p/ci"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          fail_on_error: true
+          sarif_file: semgrep-results.json
