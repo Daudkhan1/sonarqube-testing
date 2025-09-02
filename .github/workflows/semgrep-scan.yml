@@ -1,0 +1,35 @@
+name: PR Security & Quality Scan
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  semgrep:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python (Semgrep runs on Python)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # Step 3: Install Semgrep
+      - name: Install Semgrep
+        run: pip install semgrep
+
+      # Step 4: Run Semgrep scan
+      - name: Run Semgrep SAST Scan
+        run: |
+          semgrep \
+            --config "p/ci" \                # Use Semgrep’s predefined CI rules (SAST + security + quality)
+            --severity MEDIUM \               # Set minimum severity to report
+            --json \                          # Output in JSON format
+            --output semgrep-results.json \   # Save results locally
+            --dashboard-api-key ${{ secrets.SEMGREP_APP_TOKEN }} \  # Send results to Semgrep dashboard
+            --fail-on-issues       
