@@ -27,10 +27,10 @@ jobs:
       - name: Run Semgrep SAST Scan
         run: |
           semgrep \
-            --config "p/ci" \                # Use Semgrep’s predefined CI rules (SAST + security + quality)
-            --severity MEDIUM \               # Set minimum severity to report
-            --json \                          # Output in JSON format
-            --output semgrep-results.json \   # Save results locally
-            --dashboard-api-key ${{ secrets.SEMGREP_APP_TOKEN }} \  # Send results to Semgrep dashboard
-            --fail-on-issues \       
+            --config "p/ci" \
+            --severity MEDIUM \
+            --json \
+            --output semgrep-results.json \
+            --dashboard-api-key ${{ secrets.SEMGREP_APP_TOKEN }} \
+            --fail-on-issues \
             .
