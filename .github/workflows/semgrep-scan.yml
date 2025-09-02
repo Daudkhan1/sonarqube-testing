@@ -2,8 +2,6 @@ name: PR Security & Quality Scan
 
 on:
   pull_request:
-    branches:
-      - '*'
 
 jobs:
   semgrep:
@@ -22,10 +20,11 @@ jobs:
           python-version: '3.x'
 
       - name: Install Semgrep
-        run: pip install semgrep
+        run: |
+          pip install --upgrade pip
+          pip install semgrep==1.82.0
 
       - name: Run Semgrep SAST Scan
-        id: semgrep_scan
         run: |
           semgrep ci --config "p/ci" --publish-token ${{ secrets.SEMGREP_APP_TOKEN }} --json --output semgrep-results.json
 
