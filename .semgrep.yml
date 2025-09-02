@@ -3,7 +3,6 @@ rules:
     message: "A hardcoded secret or sensitive value was found. Secrets should be stored in environment variables or a secure vault."
     languages:
       - python
-      - javascript
     severity: WARNING
     patterns:
       - pattern: ($X = "..." or $X = '...')
@@ -23,7 +22,6 @@ rules:
       - pattern: exec(...)
     languages:
       - python
-      - django
     severity: WARNING
 
   # Rule 3: Finds an inefficient nested loop.
@@ -37,5 +35,4 @@ rules:
           ...
     languages:
       - python
-      - javascript
     severity: WARNING
