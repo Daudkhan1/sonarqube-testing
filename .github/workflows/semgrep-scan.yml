@@ -32,5 +32,5 @@ jobs:
             --json \                          # Output in JSON format
             --output semgrep-results.json \   # Save results locally
             --dashboard-api-key ${{ secrets.SEMGREP_APP_TOKEN }} \  # Send results to Semgrep dashboard
-            --fail-on-issues       
+            --fail-on-issues \       
             .
