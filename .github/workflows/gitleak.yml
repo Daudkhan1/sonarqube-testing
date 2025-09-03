@@ -16,14 +16,10 @@ jobs:
       # Step 2: Install GitLeaks
       - name: Install GitLeaks
         run: |
-          curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64.tar.gz | tar -xz
+          curl -sSL -o gitleaks https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64
           chmod +x gitleaks
-
+          sudo mv gitleaks /usr/local/bin/gitleaks
       # Step 3: Run GitLeaks scan
       - name: Run GitLeaks
         run: |
-          ./gitleaks detect \
-            --source . \
-            --report-format json \
-            --report-path gitleaks-report.json \
-            --verbose
+          gitleaks detect --source . --report-format json --report-path gitleaks-report.json
