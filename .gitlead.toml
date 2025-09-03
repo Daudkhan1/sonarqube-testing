@@ -1,3 +1,4 @@
+
 # Use the latest default Gitleaks rules
 [extend]
 path = "https://raw.githubusercontent.com/gitleaks/gitleaks/master/config/gitleaks.toml"
