@@ -1,5 +1,48 @@
-[allowlist]
-paths = [
-  '**/*.md',
-  '**/*.txt'
-]
+# Use the latest default Gitleaks rules
+[extend]
+path = "https://raw.githubusercontent.com/gitleaks/gitleaks/master/config/gitleaks.toml"
+
+# --- General Catch-all Rules ---
+[[rules]]
+id = "hardcoded-password"
+description = "Hardcoded password found in file."
+regex = '''(?i)(password|pwd)[:=]?\s*['"]([^'"]+)['"]'''
+tags = ["generic", "password"]
+
+
+[[rules]]
+id = "generic-catchall-entropy"
+description = "A high-entropy string was found."
+regex = '''([0-9a-zA-Z\-_=]{16,})'''
+entropy = 4.0 # A slightly higher entropy to catch more random strings
+tags = ["generic", "entropy"]
+
+
+# --- Cloud and Service-Specific Rules ---
+[[rules]]
+id = "aws-access-key"
+description = "AWS Access Key ID"
+regex = '''(AKIA[0-9A-Z]{16})'''
+tags = ["cloud", "AWS"]
+
+[[rules]]
+id = "aws-secret-access-key"
+description = "AWS Secret Access Key"
+regex = '''(?i)(aws)?_?(secret|security)_?(access)?_?(key)?[\s=:]*[\w\/+]{40}'''
+tags = ["cloud", "AWS"]
+
+[[rules]]
+id = "azure-client-secret"
+description = "Azure Client Secret"
+regex = '''(?:client_secret|azure_client_secret|az_client_secret)[\s=:]*['"]([0-9a-zA-Z\-_=]{40,})['"]'''
+tags = ["cloud", "Azure"]
+
+
+# --- Cryptographic Key Rules ---
+[[rules]]
+id = "private-key"
+description = "Generic private key"
+regex = '''-----BEGIN (?:RSA|DSA|EC|OPENSSH) PRIVATE KEY-----'''
+tags = ["cryptography", "key"]
+
+# Add more rules here for other common services like GCP, Twilio, Stripe, etc.
