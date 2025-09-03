@@ -20,6 +20,6 @@ jobs:
       - name: Run Gitleaks
         uses: zricethezav/gitleaks-action@v3
         with:
-          args: --no-git-history --config-path .gitleaks.toml
+          args: --no-git-history --config-path .gitleak.toml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
