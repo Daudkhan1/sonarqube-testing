@@ -29,5 +29,6 @@ jobs:
             --config=p/owasp-top-ten \
             --config=p/secrets \
             --config=p/ci \
+            --baseline-commit origin/${{ github.base_ref }} \
             --verbose
 
