@@ -6,9 +6,9 @@ path = "https://raw.githubusercontent.com/gitleaks/gitleaks/master/config/gitlea
 [[rules]]
 id = "hardcoded-password"
 description = "Hardcoded password found in file."
-regex = '''(?i)(pass|password|pwd|secret|token|apikey|key)([\s|_|-]?)[:=,]{1}([\s]?)["']?([^\s"']{8,})["']?'''
+regex = '''(?i)(password|pwd)[:=]?\s*['"]([^'"]+)['"]'''
 tags = ["generic", "password"]
-entropy = 3.5 # You can adjust this value, lower for more sensitive detection
+
 
 [[rules]]
 id = "generic-catchall-entropy"
