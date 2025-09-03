@@ -1,0 +1,29 @@
+name: PR Secret Scan
+
+on:
+  pull_request:
+    branches:
+      - '*'   # Scan all PRs
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Install GitLeaks
+      - name: Install GitLeaks
+        run: |
+          curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64.tar.gz | tar -xz
+          chmod +x gitleaks
+
+      # Step 3: Run GitLeaks scan
+      - name: Run GitLeaks
+        run: |
+          ./gitleaks detect \
+            --source . \
+            --report-format json \
+            --report-path gitleaks-report.json \
+            --verbose
