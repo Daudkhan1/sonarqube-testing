@@ -1,5 +1,0 @@
-[allowlist]
-paths = [
-  '**/*.md',
-  '**/*.txt'
-]
