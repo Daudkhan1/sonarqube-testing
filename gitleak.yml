@@ -1,9 +1,0 @@
-# config.yaml
-
-database:
-  user: admin
-  password: "P@ssw0rd123"  # Hardcoded secret
-
-api:
-  token: "abcdef1234567890"
-
