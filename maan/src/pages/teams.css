@@ -1,0 +1,75 @@
+/* Skills Section Styles */
+.skills-section {
+  padding: 2rem 0;
+}
+
+.skill-card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #4a3b9d 0%, #1e1840 100%);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: 100px;
+}
+
+.white-strip {
+  width: 8px;
+  background: white;
+  height: 100%;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  background: transparent;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffffff; /* Placeholder background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px; /* Adjust if you want to use text-based icons */
+}
+
+.icon.icon1 {
+  background: #ff6b6b; /* Customize per icon */
+}
+
+.icon.icon2 {
+  background: #4caf50;
+}
+
+.icon.icon3 {
+  background: #ffc107;
+}
+
+.icon.icon4 {
+  background: #2196f3;
+}
+
+.icon.icon5 {
+  background: #9c27b0;
+}
+
+.card-content span {
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  text-align: right;
+}
+
+.skill-text {
+  margin-left: 4rem; /* Pushes the text to the right side of the card */
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+}

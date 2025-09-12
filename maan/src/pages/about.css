@@ -1,0 +1,91 @@
+.our-team-main {
+  width: 90%;
+  height: 90%;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  transition: 0.5s;
+  margin-bottom: 28px;
+}
+
+@media only screen and (max-width: 768px) {
+  .our-team-main {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    transition: 0.5s;
+    margin-bottom: 28px;
+  }
+}
+
+.our-team-main img {
+  border-radius: 50%;
+  margin-bottom: 20px;
+  width: 100px;
+}
+
+.our-team-main h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.our-team-main p {
+  margin-bottom: 0;
+}
+
+.team-front {
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(to top, #1e1840, #4a3b9d);
+  padding: 15px;
+  bottom: 0px;
+  transition: all 0.5s ease;
+  border-radius: 1rem;
+}
+
+.social-media-button {
+  display: inline-block;
+  padding: 7px;
+  font-size: 24px;
+  background-color: #8d488e;
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.social-media-button:hover {
+  background-color: #00548b;
+  color: #fff;
+}
+
+.core-values-heading {
+  margin-bottom: 17px;
+}
+
+.core-values-p {
+  font-size: 15px;
+  color: #bbbbbb;
+}
+.mvg-heading {
+  color: #8d488e;
+}
+
+.section-border-right {
+  border-right: 2px solid #8d488e;
+}
+
+.location-heading {
+  font-family: "Azeret Mono", monospace;
+  font-size: 24px;
+  font-weight: 500;
+}
