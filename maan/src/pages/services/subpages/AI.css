@@ -1,0 +1,37 @@
+.service-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 6rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.bottomLine {
+  width: 75%;
+  border: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0b081c 0%, #b544c1 49%, #0b081c 99.5%);
+  margin: 0 auto;
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+}
+
+.images {
+  padding-top: 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .images {
+    padding-top: 2rem;
+  }
+}
+
+.ai-services-bg {
+  /* background-image: url("../../../assets/ai/gradient-bg.png"); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: 100%;
+  width: 100%;
+}

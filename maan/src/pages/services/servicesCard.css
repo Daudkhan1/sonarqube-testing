@@ -1,0 +1,126 @@
+.services-card {
+  background: linear-gradient(0deg, #1e1840 0%, rgba(11, 8, 27, 0) 100%);
+  box-shadow: 0px 15px 80px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 0px 30px 30px;
+  padding: 2rem;
+  -webkit-box-shadow: 30px 80px 300px 1px rgba(144, 67, 196, 0.32);
+  -moz-box-shadow: 30px 80px 300px 1px rgba(144, 67, 196, 0.32);
+  box-shadow: 30px 80px 300px 1px rgba(144, 67, 196, 0.32);
+  margin-bottom: 12rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .services-card {
+    background: linear-gradient(0deg, #1e1840 0%, rgba(11, 8, 27, 0) 100%);
+    box-shadow: 0px 15px 80px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 0px 0px 30px 30px;
+    padding: 2rem;
+    -webkit-box-shadow: 30px 80px 300px 1px rgba(144, 67, 196, 0.32);
+    -moz-box-shadow: 30px 80px 300px 1px rgba(144, 67, 196, 0.32);
+    box-shadow: 30px 80px 300px 1px rgba(144, 67, 196, 0.32);
+    margin-bottom: 6rem;
+  }
+}
+
+.services-card button {
+  margin: 10px 10px;
+  padding: 10px;
+  background-color: #1e184000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 10px;
+  font-size: small;
+}
+
+.services-card button:hover {
+  background-color: #4c284d;
+  color: #fff;
+  outline: #d3d0df;
+}
+
+/* Add this style for the active class */
+.services-card button.active {
+  background-color: #4c284d;
+}
+
+.services-card img {
+  width: auto;
+  height: 278px;
+}
+
+.service-cta {
+  color: #fff;
+  padding: 0.5rem 1.5rem !important;
+  background: #4c284d !important;
+  outline: 1px solid #cd94ce;
+  border-radius: 4px !important;
+  transition: background-image 0.3s ease-in-out;
+}
+
+.service-cta:hover {
+  background-image: linear-gradient(to top, #4c284d, #8d488e) !important;
+}
+
+.services-text-right {
+  margin-right: 50px;
+  width: 60%;
+}
+
+@media only screen and (max-width: 1400px) {
+  .services-text-right {
+    margin-right: 20px;
+    width: 45%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .services-text-right {
+    margin-right: 20px;
+    width: 48%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .services-text-right {
+    margin-right: 0px;
+    width: 100%;
+  }
+}
+
+.services-text-left {
+  margin-left: 50px;
+  width: 60%;
+}
+
+@media only screen and (max-width: 1400px) {
+  .services-text-left {
+    margin-left: 20px;
+    width: 45%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .services-text-left {
+    margin-left: 20px;
+    width: 48%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .services-text-left {
+    margin-left: 0px;
+    width: 100%;
+  }
+}
+
+.services-text-image {
+  display: block;
+}
+
+@media only screen and (max-width: 1000px) {
+  .services-text-image {
+    display: none;
+  }
+}

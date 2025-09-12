@@ -1,0 +1,19 @@
+.tile {
+  background: linear-gradient(0deg, #1e1840 0%, #4a3b9d 100%);
+  color: #ffffff;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.tile h1 {
+  color: #cd94ce;
+  font-weight: 600;
+  text-align: center;
+}
+
+.tile p {
+  color: #ffffff;
+  text-align: center;
+  font-size: x-large;
+  font-weight: 400;
+}
