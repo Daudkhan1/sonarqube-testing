@@ -1,0 +1,12 @@
+# Python secret examples
+token = "abc12345678"
+apikey="abcdef123456"
+secret= "shhhSecretKey"
+passwd = "passw0rd!"
+password="P@ssword1234"
+auth = "Bearer abcd1234"
+key="123456abcdef"
+access_key = "AKIAZZZZZZZZZZZZZZZZ"
+secret_key="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+aws_access_key = "AKIA1234567890EXAMPLE"
+aws_secret_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
