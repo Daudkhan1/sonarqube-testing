@@ -20,21 +20,20 @@ jobs:
           mkdir -p ./secret-config
           cat > ./secret-config/trivy.yaml <<'EOF'
           rules:
-            - id: package-lock-secret
-              category: dependency
-              title: Secret in package-lock.json
+            - id: generic-secret
+              category: general
+              title: Generic Secret Detection
               severity: CRITICAL
               regex: (?i)(?P<key>(token|apikey|secret|passwd|password|auth|key))(=|:).{0,5}['"]?(?P<secret>[0-9a-zA-Z\-_=]{8,64})['"]?
-              path: .*package-lock\.json
+              path: .*\.((py|json|js|ts|yaml|yml|env|Dockerfile))$
           enable-builtin-rules:
-            - aws-access-key
-            - aws-account-id
-            - aws-secret-key
+            - aws-access-key-id
+            - aws-secret-access-key
             - github-pat
-            - generic-api-key
-            - jwt
-            - basic-auth
             - private-key
+            - generic-api-key
+            - basic-auth
+            - jwt
           EOF
 
       - name: Run Trivy FS Scan
