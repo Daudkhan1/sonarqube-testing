@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  static-website:
+    image: 536697258871.dkr.ecr.me-central-1.amazonaws.com/maanz-website:v1.0.0
+    ports:
+      - "3002:3002"
+    networks:
+      - maanz-net
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1        
+        delay: 10s            
+        order: start-first    
+        failure_action: rollback
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+networks:
+  maanz-net:
+    driver: overlay
