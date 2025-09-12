@@ -1,25 +1,25 @@
 name: Secret Scan
 
 on:
-  push:
   pull_request:
+    branches: [ main ]
 
 jobs:
-  trivy-secret-scan:
+  secret-scan:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Install Trivy
-        uses: aquasecurity/setup-trivy@v0.2.2   # official action, no curl hack needed
+        uses: aquasecurity/setup-trivy@v0.2.2
 
-      - name: Run Trivy Secret Scan
+      - name: Run Secret Scan
         run: |
-          trivy fs --scanners secret --format table -o trivy-secret-report.txt .
-          cat trivy-secret-report.txt
+          trivy fs --scanners secret \
+            --secret-config ./trivy-secret.yaml \
+            --format table -o trivy-secret-report.txt .
 
-      - name: Upload Secret Report
+      - name: Upload Report
         uses: actions/upload-artifact@v4
         with:
           name: trivy-secret-report
