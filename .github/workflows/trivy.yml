@@ -12,6 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install Trivy
+        uses: aquasecurity/setup-trivy@v0.2.2
+
       - name: Run Trivy FS Scan
         run: trivy fs --format json -o trivy-report.json .
 
