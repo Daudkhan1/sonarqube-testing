@@ -1,0 +1,20 @@
+name: Trivy FS Scan on PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  trivy-fs-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy FS Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: CRITICAL,HIGH
