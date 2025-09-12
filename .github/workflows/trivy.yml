@@ -1,12 +1,12 @@
-name: Trivy FS Scan on PR
+name: Trivy FS + Secret Scan on PR
 
 on:
   pull_request:
     branches:
       - main
-# its trivy file scaning
+
 jobs:
-  trivy-fs-scan:
+  trivy-scan:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -15,15 +15,40 @@ jobs:
       - name: Install Trivy
         uses: aquasecurity/setup-trivy@v0.2.2
 
-      - name: Run Trivy FS Scan (JSON + TXT)
+      - name: Create Trivy Secret Config
         run: |
-          trivy fs --format json -o trivy-report.json .
-          trivy fs --format table -o trivy-report.txt .
+          mkdir -p ./secret-config
+          cat > ./secret-config/trivy.yaml <<'EOF'
+          rules:
+            - id: package-lock-secret
+              category: dependency
+              title: Secret in package-lock.json
+              severity: CRITICAL
+              regex: (?i)(?P<key>(token|apikey|secret|passwd|password|auth|key))(=|:).{0,5}['"]?(?P<secret>[0-9a-zA-Z\-_=]{8,64})['"]?
+              path: .*package-lock\.json
+          enable-builtin-rules:
+            - aws-access-key-id
+            - aws-account-id
+            - aws-secret-access-key
+            - github-pat
+            - generic-api-key
+            - jwt
+            - basic-auth
+            - private-key
+          EOF
+
+      - name: Run Trivy FS Scan
+        run: |
+          trivy fs --format table -o trivy-fs-report.txt .
+
+      - name: Run Trivy Secret Scan
+        run: |
+          trivy fs --security-checks secret --secret-config ./secret-config/trivy.yaml --format table -o trivy-secret-report.txt .
 
       - name: Upload Trivy Reports
         uses: actions/upload-artifact@v4
         with:
           name: trivy-reports
           path: |
-            trivy-report.json
-            trivy-report.txt
+            trivy-fs-report.txt
+            trivy-secret-report.txt
