@@ -13,8 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Trivy FS Scan
-        - name: Run Trivy FS Scan
-          run: trivy fs --format json -o trivy-report.json .
+        run: trivy fs --format json -o trivy-report.json .
 
       - name: Upload Trivy Report
         uses: actions/upload-artifact@v3
