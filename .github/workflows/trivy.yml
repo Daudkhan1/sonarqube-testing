@@ -23,7 +23,7 @@ jobs:
      - name: Upload Trivy Reports
        uses: actions/upload-artifact@v4
        with:
-       name: trivy-reports
-       path: |
-         trivy-report.json
-         trivy-report.txt
+         name: trivy-reports
+         path: |
+           trivy-report.json
+           trivy-report.txt
