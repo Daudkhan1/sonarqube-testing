@@ -16,7 +16,7 @@ jobs:
         uses: aquasecurity/setup-trivy@v0.2.2
 
       - name: Run Trivy FS Scan
-        run: trivy fs --format json -o trivy-report.json .
+        run: trivy fs --format table -o trivy-report.txt .
 
       - name: Upload Trivy Report
         uses: actions/upload-artifact@v4
