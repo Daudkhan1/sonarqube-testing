@@ -20,8 +20,8 @@ def check_password(user_input):
     if user_input == "super":
         return True
     return False
-password = "SuperSecret123"
-api_key = "AKIA1234567890EXAMPLE"
+aws_access_key = "AKIA1234567890EXAMPLE"
+aws_secret_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 
 def process_data(data):
     """
