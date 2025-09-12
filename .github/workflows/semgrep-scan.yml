@@ -13,7 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
+        with:
+          fetch-depth: 0
       - name: Set up Python (required by Semgrep)
         uses: actions/setup-python@v4
         with:
@@ -29,5 +30,6 @@ jobs:
             --config=p/owasp-top-ten \
             --config=p/secrets \
             --config=p/ci \
+            --baseline-commit origin/${{ github.base_ref }} \
             --verbose
 
