@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - main
-
+# its trivy file scaning
 jobs:
   trivy-fs-scan:
     runs-on: ubuntu-latest
@@ -12,9 +12,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Trivy FS Scan
-        uses: aquasecurity/trivy-action@master
+      - name: Install Trivy
+        uses: aquasecurity/setup-trivy@v0.2.2
+
+      - name: Run Trivy FS Scan (JSON + TXT)
+        run: |
+          trivy fs --format json -o trivy-report.json .
+          trivy fs --format table -o trivy-report.txt .
+
+      - name: Upload Trivy Reports
+        uses: actions/upload-artifact@v4
         with:
-          scan-type: fs
-          scan-ref: .
-          severity: CRITICAL,HIGH
+          name: trivy-reports
+          path: |
+            trivy-report.json
+            trivy-report.txt
