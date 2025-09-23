@@ -32,5 +32,5 @@ jobs:
           username: ubuntu                  # or ec2-user depending on the AMI
           key: ${{ secrets.SSH_KEY }}       # private key
           script: |
-            echo "docker ps "
-            hostname
+            echo "check the running containers"
+            docker ps
