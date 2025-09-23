@@ -1,0 +1,26 @@
+name: GCP Test Pipeline
+
+on:
+  push:   # run manually from GitHub Actions tab
+    branches: 
+      - staging
+jobs:
+  test-gcp:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Setup gcloud CLI
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Verify authentication
+        run: gcloud auth list
