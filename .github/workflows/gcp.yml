@@ -24,3 +24,13 @@ jobs:
 
       - name: Verify authentication
         run: gcloud auth list
+
+      - name: SSH to test instance
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_IP }}       # public IP of your EC2
+          username: ubuntu                  # or ec2-user depending on the AMI
+          key: ${{ secrets.SSH_KEY }}       # private key
+          script: |
+            echo "Testing SSH connection"
+            hostname
